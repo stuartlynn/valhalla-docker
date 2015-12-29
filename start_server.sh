@@ -1,2 +1,2 @@
 #!/bin/sh
-docker run -P --rm -it -v $(pwd)/data:/data/valhalla valhalla
+docker run  --rm -p 5432:8002/tcp -it -v $(pwd)/data:/data/valhalla valhalla

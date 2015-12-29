@@ -32,14 +32,26 @@ Finally to start the server run
 
     ./start_server.sh
 
-which will start the server running.
+which will start the server running on port 5432 (you can change this by editing start_server.sh).
+
+Alternatively run the docker command
+
+    docker run  --rm -p 5432:8002/tcp -it -v $(pwd)/data:/data/valhalla valhalla
+
 
 # Getting routes
 
-If you are using docker machine you can grab the ip of the instance at
+If you are using docker machine you can grab the ip of the instance by running
+
+    docker-machine ip default
+
+then simply point your browser or curl or whatever at that ip and port 5432.
+For example
+
+    curl http://192.168.99.100:5432/route?json={%22locations%22:[{%22lat%22:40.70236,%22lon%22:-73.91661},{%22lat%22:40.70451,%22lon%22:-73.93667}],%22costing%22:%22auto%22}
 
 
 # Pull requests
 
 Relatively new to Docker, if you have updates or improvements to this repo
-pull requests are very welcome 
+pull requests are very welcome
