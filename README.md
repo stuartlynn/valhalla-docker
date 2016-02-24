@@ -20,6 +20,10 @@ example if you want to have routing in New York grab the corresponding osm.pbf f
     cd data
     wget http://download.geofabrik.de/north-america/us/new-york-latest.osm.pbf
 
+
+Also we need to fetch a configuration file for valhalla. You can grab the one [here](https://github.com/valhalla/conf/blob/master/valhalla.json) and place it in
+the data folder as well.
+
 Finally run the generate_tiles.sh script
 
     ./generate_tiles.sh

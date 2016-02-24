@@ -16,49 +16,49 @@ WORKDIR /opt
 RUN git clone --depth=1 --recurse-submodules --single-branch --branch=master https://github.com/zeromq/libzmq.git
 WORKDIR /opt/libzmq
 RUN ./autogen.sh
-RUN ./configure --without-libsodium --without-documentation; make -j;  make install
+RUN ./configure --without-libsodium --without-documentation;  make install
 WORKDIR /opt
 
 #grab prime_server API:
 RUN git clone --depth=1 --recurse-submodules --single-branch --branch=master https://github.com/kevinkreiser/prime_server.git
 WORKDIR /opt/prime_server
-RUN ./autogen.sh; ./configure ; make -j; make install
+RUN ./autogen.sh; ./configure ; make install
 WORKDIR /opt
 
 #grab midgard
 RUN  git clone --recurse-submodules https://github.com/valhalla/midgard
 WORKDIR /opt/midgard
-RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make -j; make install;
+RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
 WORKDIR /opt
 
 #grab baldr
 RUN  git clone --recurse-submodules https://github.com/valhalla/baldr
 WORKDIR /opt/baldr
-RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make -j2; make install;
+RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
 WORKDIR /opt
 
 #grab sif
 RUN  git clone --recurse-submodules https://github.com/valhalla/sif
 WORKDIR /opt/sif
-RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make -j; make install;
+RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
 WORKDIR /opt
 
 #grab skadi
 RUN  git clone --recurse-submodules https://github.com/valhalla/skadi
 WORKDIR /opt/skadi
-RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make -j; make install;
+RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
 WORKDIR /opt
 
 #grab mjolnir
 RUN  git clone --recurse-submodules https://github.com/valhalla/mjolnir
 WORKDIR /opt/mjolnir
-RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make -j3; make install;
+RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
 WORKDIR /opt
 
 #grab loki
 RUN  git clone --recurse-submodules https://github.com/valhalla/loki
 WORKDIR /opt/loki
-RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make -j3; make install;
+RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
 WORKDIR /opt
 
 
@@ -81,13 +81,13 @@ WORKDIR /opt
 #grab thor
 RUN  git clone --recurse-submodules https://github.com/valhalla/thor.git
 WORKDIR /opt/thor
-RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make -j3; make install;
+RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
 WORKDIR /opt
 
 #grab tyr
 RUN  git clone --recurse-submodules https://github.com/valhalla/tyr.git
 WORKDIR /opt/tyr
-RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make -j3; make install;
+RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
 WORKDIR /opt
 #
 # #download some data and make tiles out of it
@@ -100,7 +100,7 @@ WORKDIR /opt/tyr
 EXPOSE 8002
 EXPOSE 8080
 
-CMD LD_LIBRARY_PATH=/usr/lib:/usr/local/lib /opt/tyr/tyr_simple_service /opt/tyr/conf/valhalla.json
+CMD LD_LIBRARY_PATH=/usr/lib:/usr/local/lib tyr_service /data/valhalla/valhalla.json
 #CMD LD_LIBRARY_PATH=/usr/lib:/usr/local/lib tyr/tyr_simple_service tyr/conf/valhalla.json
 
 
