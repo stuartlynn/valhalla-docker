@@ -89,8 +89,13 @@ RUN  git clone --recurse-submodules https://github.com/valhalla/tyr.git
 WORKDIR /opt/tyr
 RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
 WORKDIR /opt
-#
-# #download some data and make tiles out of it
+
+#grab tools
+
+RUN  git clone --recurse-submodules https://github.com/valhalla/tools.git
+WORKDIR /opt/tools
+RUN  ./autogen.sh; ./configure CPPFLAGS=-DBOOST_SPIRIT_THREADSAFE;  make ; make install;
+WORKDIR /opt
 
 ADD scripts /opt/scripts
 #Run the server
@@ -100,7 +105,7 @@ WORKDIR /opt/tyr
 EXPOSE 8002
 EXPOSE 8080
 
-CMD LD_LIBRARY_PATH=/usr/lib:/usr/local/lib tyr_service /data/valhalla/valhalla.json
+CMD LD_LIBRARY_PATH=/usr/lib:/usr/local/lib /opt/tools/tyr_simple_service /data/valhalla/valhalla.json
 #CMD LD_LIBRARY_PATH=/usr/lib:/usr/local/lib tyr/tyr_simple_service tyr/conf/valhalla.json
 
 
